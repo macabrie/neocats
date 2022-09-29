@@ -2,10 +2,12 @@ const path = require('path');
 
 module.exports = {
   mode: 'development',
-  entry: '/index.js',
+  entry: {
+    app: './src/index.js',
+  },
   output: {
-    path: __dirname,
-    filename: './public/bundle.js',
+    path: path.resolve(__dirname, 'public'),
+    filename: 'bundle.js',
   },
   devtool: 'source-map',
   module: {
@@ -27,9 +29,15 @@ module.exports = {
     ],
   },
   devServer: {
-    static: {
-      directory: path.join(__dirname, 'public'),
-    },
+    static: [
+      {
+        directory: path.join(__dirname, 'public'),
+      },
+      {
+        directory: path.join(__dirname, 'src'),
+      },
+    ],
+    hot: true,
     port: 8080,
   },
 };

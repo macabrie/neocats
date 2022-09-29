@@ -2,9 +2,12 @@
   "name": "platformer-game",
   "version": "1.0.0",
   "description": "",
-  "main": "game.js",
+  "main": "index.js",
   "scripts": {
-    "start": "webpack serve --mode development --entry ./src/game.js",
+    "build": "webpack",
+    "build:dev": "npm run build -- --watch --mode=development",
+    "start": "webpack serve --mode development --entry ./src/index.js",
+    "start:dev": "npm run build:dev && npx webpack serve --config ./webpack.config.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
