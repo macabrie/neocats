@@ -7,11 +7,24 @@ export default class StartGame extends Phaser.Scene {
 
   preload() {
     this.load.image('sky', '../assets/sky.png');
+    this.load.image('ground', '../assets/platform.png');
+    this.load.image('diamond', '../assets/diamond.png');
+    this.load.spritesheet('player', '../assets/adventurer.png', {
+      frameWidth: 50,
+      frameHeight: 37,
+    });
   }
 
   create() {
-    this.add.sprite(0, 0, 'sky');
-    this.add.text(20, 20, 'loading');
+    this.sky = this.add.image(100, 0, 'sky');
+    this.sky.setScale(2);
+
+    this.add.text(
+      this.game.config.width / 2 - 50,
+      this.game.config.height / 2,
+      'loading'
+    );
+
     this.scene.start('levelOne');
   }
 }
