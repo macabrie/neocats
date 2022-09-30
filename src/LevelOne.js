@@ -11,10 +11,20 @@ export default class LevelOne extends Phaser.Scene {
 
   create() {
     const { config } = this.game;
+
+    this.add.text(config.width / 2 - 50, 20, 'level one');
+
+    //BACKGROUND
     this.sky = this.add.image(0, 0, 'sky');
     this.sky.setScale(2);
 
-    this.add.text(config.width / 2 - 50, 20, 'level one');
+    //PLATFORMS
+    this.platforms = this.physics.add.staticGroup();
+    this.platforms.create(400, 568, 'ground').setScale(2).refreshBody();
+
+    this.platforms.create(600, 400, 'ground');
+    this.platforms.create(50, 250, 'ground');
+    this.platforms.create(750, 220, 'ground');
 
     //PLAYER PLACEMENT
     this.player = this.physics.add.sprite(30, config.height - 100, 'player');
@@ -35,16 +45,15 @@ export default class LevelOne extends Phaser.Scene {
     });
     this.anims.create({
       key: 'player_jump',
-      frames: this.anims.generateFrameNumbers('player', { start: 14, end: 28 }),
+      frames: this.anims.generateFrameNumbers('player', { start: 14, end: 23 }),
       frameRate: 7,
-      repeat: -1,
+      repeat: 0,
     });
 
-    this.player.body.setGravityY(600);
+    //GRAVITY AND COLLISION
+    this.player.body.setGravityY(250);
     this.player.body.collideWorldBounds = true;
-    this.player.play('player_idle');
-
-    this.cursorKeys = this.input.keyboard.createCursorKeys();
+    this.physics.add.collider(this.player, this.platforms);
   }
 
   update() {
@@ -52,18 +61,30 @@ export default class LevelOne extends Phaser.Scene {
   }
 
   movePlayerManager() {
-    if (this.cursorKeys.left.isDown) {
+    let keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
+    let keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
+    let keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
+    let keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
+    let spacebar = this.input.keyboard.addKey(
+      Phaser.Input.Keyboard.KeyCodes.SPACE
+    );
+
+    //LEFT, RIGHT, STOP
+    if (keyA.isDown) {
       this.player.setVelocityX(-160);
       this.player.play('player_right', true).flipX = true;
-    } else if (this.cursorKeys.right.isDown) {
+    } else if (keyD.isDown) {
       this.player.setVelocityX(160);
       this.player.play('player_right', true).flipX = false;
-    } else if (this.cursorKeys.up.isDown && this.player.body.touching.down) {
-      this.player.setVelocityY(-130);
-      this.player.play('player_jump', true);
     } else {
       this.player.setVelocityX(0);
       this.player.anims.play('player_idle', true);
+    }
+
+    //JUMP
+    if (spacebar.isDown && this.player.body.touching.down) {
+      this.player.setVelocityY(-300);
+      this.player.play('player_jump');
     }
   }
 }
