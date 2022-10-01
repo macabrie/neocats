@@ -9,10 +9,20 @@ export default class StartGame extends Phaser.Scene {
     this.load.image('sky', '../assets/sky.png');
     this.load.image('ground', '../assets/platform.png');
     this.load.image('diamond', '../assets/diamond.png');
+
+    //PLATFORM PLAYER
     this.load.spritesheet('player', '../assets/adventurer.png', {
       frameWidth: 50,
       frameHeight: 37,
     });
+
+    //TOPDOWN PLAYER
+    this.load.spritesheet('tdPlayer', '../assets/Character/topdownCat.png', {
+      frameWidth: 32,
+      frameHeight: 32,
+    });
+
+    //TOWN TILEMAP
     this.load.image('floorTile', '../assets/Tileset/TilesetFloor.png');
     this.load.image('waterTile', '../assets/Tileset/TilesetWater.png');
     this.load.image('houseTile', '../assets/Tileset/TilesetHouse.png');
