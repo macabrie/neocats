@@ -4,15 +4,15 @@ const gameSettings = {
   playerSpeed: 200,
 };
 
-export default class LevelOne extends Phaser.Scene {
+export default class Dojo extends Phaser.Scene {
   constructor() {
-    super({ key: 'levelOne' });
+    super({ key: 'dojo' });
   }
 
   create() {
     const { config } = this.game;
 
-    this.add.text(config.width / 2 - 50, 20, 'level one');
+    this.add.text(config.width / 2 - 50, 20, 'dojo');
 
     //BACKGROUND
     this.sky = this.add.image(0, 0, 'sky');

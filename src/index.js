@@ -1,13 +1,13 @@
 import * as Phaser from 'phaser';
 import StartGame from './Start';
-import LevelOne from './LevelOne';
 import Town from './Town';
+import Dojo from './Dojo';
 
 const config = {
   width: 800,
   height: 600,
   type: Phaser.AUTO,
-  scene: [StartGame, LevelOne, Town],
+  scene: [StartGame, Dojo, Town],
   pixelArt: true,
   physics: {
     default: 'arcade',
