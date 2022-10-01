@@ -3,7 +3,7 @@
  <editorsettings>
   <export target="TilesetMap.tmj" format="json"/>
  </editorsettings>
- <tileset firstgid="1" source="TilesetFloor.tsx"/>
+ <tileset firstgid="1" source="TilesetFloor.tsj"/>
  <tileset firstgid="573" source="TilesetNature.tsx"/>
  <tileset firstgid="909" source="TilesetWater.tsx"/>
  <tileset firstgid="1385" source="TilesetHouse.tsx"/>

@@ -13,6 +13,11 @@ export default class StartGame extends Phaser.Scene {
       frameWidth: 50,
       frameHeight: 37,
     });
+    this.load.image('floorTile', '../assets/Tileset/TilesetFloor.png');
+    this.load.image('waterTile', '../assets/Tileset/TilesetWater.png');
+    this.load.image('houseTile', '../assets/Tileset/TilesetHouse.png');
+    this.load.image('natureTile', '../assets/Tileset/TilesetNature.png');
+    this.load.tilemapTiledJSON('map', '../assets/Tileset/TilesetMap.tmj');
   }
 
   create() {
@@ -25,6 +30,6 @@ export default class StartGame extends Phaser.Scene {
       'loading'
     );
 
-    this.scene.start('levelOne');
+    this.scene.start('town');
   }
 }
