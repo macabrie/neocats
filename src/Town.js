@@ -29,22 +29,30 @@ export default class Town extends Phaser.Scene {
       0,
       0
     );
-    const OverheadLayer = map.createLayer(
+    const overheadLayer = map.createLayer(
       'Overhead',
       [houseTile, natureTile],
       0,
       0
     );
 
-    //PLAYER PLACEMENT
+    //PLAYER PLACEMENT AND HITBOX
     this.player = this.physics.add.sprite(
       30,
       config.height - 330,
       'tdPlayer',
       1
     );
-    /* this.player.frame = 1; */
+    this.player.setSize(15, 10, false).setOffset(10, 22);
+
+    //PLAYER AND LAYER DEPTH
+    this.player.setDepth(10);
+    overheadLayer.setDepth(20);
+
+    //COLLISIONS
     this.player.body.collideWorldBounds = true;
+    barrierLayer.setCollisionByProperty({ collide: true });
+    this.physics.add.collider(this.player, barrierLayer);
 
     //PLAYER ANIMATIONS
     this.anims.create({
