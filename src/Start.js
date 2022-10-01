@@ -6,9 +6,11 @@ export default class StartGame extends Phaser.Scene {
   }
 
   preload() {
-    this.load.image('sky', '../assets/sky.png');
-    this.load.image('ground', '../assets/platform.png');
-    this.load.image('diamond', '../assets/diamond.png');
+    //TOPDOWN PLAYER
+    this.load.spritesheet('tdPlayer', '../assets/Character/topdownCat.png', {
+      frameWidth: 32,
+      frameHeight: 32,
+    });
 
     //PLATFORM PLAYER
     this.load.spritesheet('player', '../assets/adventurer.png', {
@@ -16,18 +18,12 @@ export default class StartGame extends Phaser.Scene {
       frameHeight: 37,
     });
 
-    //TOPDOWN PLAYER
-    this.load.spritesheet('tdPlayer', '../assets/Character/topdownCat.png', {
-      frameWidth: 32,
-      frameHeight: 32,
-    });
-
     //TOWN TILEMAP
-    this.load.image('floorTile', '../assets/Tileset/TilesetFloor.png');
-    this.load.image('waterTile', '../assets/Tileset/TilesetWater.png');
-    this.load.image('houseTile', '../assets/Tileset/TilesetHouse.png');
-    this.load.image('natureTile', '../assets/Tileset/TilesetNature.png');
-    this.load.tilemapTiledJSON('map', '../assets/Tileset/TilesetMap.tmj');
+    this.load.image('floorTile', '../assets/TownAssets/TilesetFloor.png');
+    this.load.image('waterTile', '../assets/TownAssets/TilesetWater.png');
+    this.load.image('houseTile', '../assets/TownAssets/TilesetHouse.png');
+    this.load.image('natureTile', '../assets/TownAssets/TilesetNature.png');
+    this.load.tilemapTiledJSON('map', '../assets/TownAssets/TilesetMap.tmj');
   }
 
   create() {

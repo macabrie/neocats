@@ -7,7 +7,7 @@ const config = {
   width: 800,
   height: 600,
   type: Phaser.AUTO,
-  scene: [StartGame, Town, Dojo],
+  scene: [StartGame, Town],
   pixelArt: true,
   physics: {
     default: 'arcade',
