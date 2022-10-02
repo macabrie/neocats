@@ -2,14 +2,20 @@
   "name": "platformer-game",
   "version": "1.0.0",
   "description": "",
-  "main": "game.js",
+  "main": "index.js",
   "scripts": {
+    "build": "webpack",
+    "build:dev": "npm run build -- --watch --mode=development",
+    "start": "webpack serve --mode development --entry ./src/index.js",
+    "start:dev": "npm run build && webpack serve --config ./webpack.config.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "phaser": "^3.55.2"
+    "@babel/preset-env": "^7.19.3",
+    "phaser": "^3.55.2",
+    "webpack-dev-server": "^4.11.1"
   },
   "devDependencies": {
     "@babel/core": "^7.19.3",
