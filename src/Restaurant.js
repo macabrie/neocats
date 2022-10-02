@@ -9,12 +9,18 @@ export default class Dojo extends Phaser.Scene {
 
     //LEVEL AND SCORE TEXT
     this.level = this.add.text(config.width / 2 - 170, 60, 'collect the food!');
+
+    this.timer = this.time.delayedCall(10000, this.gameOver, [], this);
+    this.timerText = this.add.text(config.width - 170, 20);
+
     this.score = 0;
     this.scoreText = this.add.text(
       config.width - 170,
-      20,
+      40,
       `score: ${this.score}`
     );
+
+    this.gameOverText = this.add.text(350, 300).setDepth(30);
     this.quitText = this.add.text(config.width - 170, 100, 'press q to quit');
 
     //TILEMAP
@@ -36,6 +42,7 @@ export default class Dojo extends Phaser.Scene {
     barrierLayer.setDepth(20).scale = 2;
     this.level.setDepth(30);
     this.scoreText.setDepth(30);
+    this.timerText.setDepth(30);
     this.quitText.setDepth(30);
 
     //GRAVITY AND COLLISION
@@ -111,11 +118,13 @@ export default class Dojo extends Phaser.Scene {
   }
 
   moveFood(food, speed) {
-    const { config } = this.game;
-    food.y += speed;
+    if (food.active) {
+      const { config } = this.game;
+      food.y += speed;
 
-    if (food.y > config.height) {
-      this.resetFood(food);
+      if (food.y > config.height) {
+        this.resetFood(food);
+      }
     }
   }
 
@@ -125,6 +134,22 @@ export default class Dojo extends Phaser.Scene {
     food.y = 0;
     const randomX = Phaser.Math.Between(60, config.width - 60);
     food.x = randomX;
+  }
+
+  gameOver() {
+    this.player.body.moves = false;
+    this.player.active = false;
+
+    this.applePie.active = false;
+    this.cheesecake.active = false;
+    this.chocoCake.active = false;
+    this.cookies.active = false;
+    this.icecream.active = false;
+    this.pudding.active = false;
+    this.sbCake.active = false;
+    this.waffle.active = false;
+
+    this.gameOverText.text = `game over\nyour score: ${this.score}`;
   }
 
   update() {
@@ -138,6 +163,11 @@ export default class Dojo extends Phaser.Scene {
     this.moveFood(this.waffle, 5);
 
     this.movePlayerManager();
+
+    //TIMER
+    this.timerText.setText(
+      'timer: ' + (this.timer.getRemaining() / 1000).toFixed(0)
+    );
 
     //QUIT OPTION
     let keyQ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Q);
