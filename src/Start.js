@@ -13,10 +13,30 @@ export default class StartGame extends Phaser.Scene {
     });
 
     //PLATFORM PLAYER
-    this.load.spritesheet('player', '../assets/adventurer.png', {
-      frameWidth: 50,
-      frameHeight: 37,
-    });
+    this.load.spritesheet(
+      'platPlayerIdle',
+      '../assets/Character/platformCatIdle.png',
+      {
+        frameWidth: 16,
+        frameHeight: 16,
+      }
+    );
+    this.load.spritesheet(
+      'platPlayerRun',
+      '../assets/Character/platformCatRun.png',
+      {
+        frameWidth: 16,
+        frameHeight: 16,
+      }
+    );
+    this.load.spritesheet(
+      'platPlayerJump',
+      '../assets/Character/platformCatJump.png',
+      {
+        frameWidth: 16,
+        frameHeight: 16,
+      }
+    );
 
     //TOWN TILEMAP
     this.load.image('floorTile', '../assets/TownAssets/TilesetFloor.png');
@@ -24,6 +44,13 @@ export default class StartGame extends Phaser.Scene {
     this.load.image('houseTile', '../assets/TownAssets/TilesetHouse.png');
     this.load.image('natureTile', '../assets/TownAssets/TilesetNature.png');
     this.load.tilemapTiledJSON('map', '../assets/TownAssets/TilesetMap.tmj');
+
+    //RESTAURANT TILEMAP
+    this.load.image('rTiles', '../assets/RestaurantAssets/rTiles.png');
+    this.load.tilemapTiledJSON(
+      'rMap',
+      '../assets/RestaurantAssets/RestaurantMap.tmj'
+    );
   }
 
   create() {
@@ -36,6 +63,6 @@ export default class StartGame extends Phaser.Scene {
       'loading'
     );
 
-    this.scene.start('town');
+    this.scene.start('rest');
   }
 }
