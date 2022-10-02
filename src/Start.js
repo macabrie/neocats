@@ -25,6 +25,22 @@ export default class StartGame extends Phaser.Scene {
       'rMap',
       '../assets/RestaurantAssets/RestaurantMap.tmj'
     );
+
+    //FOOD ASSETS
+    this.load.image('applePie', '../assets/RestaurantAssets/Food/applePie.png');
+    this.load.image(
+      'cheesecake',
+      '../assets/RestaurantAssets/Food/cheesecake.png'
+    );
+    this.load.image(
+      'chocoCake',
+      '../assets/RestaurantAssets/Food/chocoCake.png'
+    );
+    this.load.image('cookies', '../assets/RestaurantAssets/Food/cookies.png');
+    this.load.image('icecream', '../assets/RestaurantAssets/Food/icecream.png');
+    this.load.image('pudding', '../assets/RestaurantAssets/Food/pudding.png');
+    this.load.image('sbCake', '../assets/RestaurantAssets/Food/sbCake.png');
+    this.load.image('waffle', '../assets/RestaurantAssets/Food/waffle.png');
   }
 
   create() {

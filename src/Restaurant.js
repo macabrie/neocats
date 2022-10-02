@@ -51,9 +51,45 @@ export default class Dojo extends Phaser.Scene {
       frameRate: 7,
       repeat: -1,
     });
+
+    //FOOD PLACEMENT
+    this.applePie = this.add.image(100, 50, 'applePie');
+    this.cheesecake = this.add.image(150, 50, 'cheesecake');
+    this.chocoCake = this.add.image(200, 50, 'chocoCake');
+    this.cookies = this.add.image(250, 50, 'cookies');
+    this.icecream = this.add.image(300, 50, 'icecream');
+    this.pudding = this.add.image(350, 50, 'pudding');
+    this.sbCake = this.add.image(400, 50, 'sbCake');
+    this.waffle = this.add.image(450, 50, 'waffle');
+  }
+
+  moveFood(food, speed) {
+    const { config } = this.game;
+    food.y += speed;
+
+    if (food.y > config.height) {
+      this.resetFood(food);
+    }
+  }
+
+  resetFood(food) {
+    const { config } = this.game;
+
+    food.y = 0;
+    const randomX = Phaser.Math.Between(60, config.width - 60);
+    food.x = randomX;
   }
 
   update() {
+    this.moveFood(this.applePie, 2.5);
+    this.moveFood(this.cheesecake, 3.5);
+    this.moveFood(this.chocoCake, 6);
+    this.moveFood(this.cookies, 7);
+    this.moveFood(this.icecream, 3.1);
+    this.moveFood(this.pudding, 5.5);
+    this.moveFood(this.sbCake, 4.5);
+    this.moveFood(this.waffle, 5);
+
     this.movePlayerManager();
   }
 
