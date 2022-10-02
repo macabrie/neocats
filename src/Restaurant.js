@@ -18,9 +18,10 @@ export default class Dojo extends Phaser.Scene {
 
     //PLAYER PLACEMENT AND HITBOX
     this.player = this.physics.add.sprite(
-      50,
-      config.height - 200,
-      'platPlayerIdle'
+      60,
+      config.height - 210,
+      'catPlayer',
+      7
     );
     this.player.setScale(2);
 
@@ -29,9 +30,61 @@ export default class Dojo extends Phaser.Scene {
     barrierLayer.setDepth(20).scale = 2;
 
     //GRAVITY AND COLLISION
-    this.player.body.setGravityY(250);
+    this.player.body.setGravityY(300);
     this.player.body.collideWorldBounds = true;
     barrierLayer.setCollisionByProperty({ collide: true });
     this.physics.add.collider(this.player, barrierLayer);
+
+    //PLAYER ANIMATIONS
+    this.anims.create({
+      key: 'player_left',
+      frames: this.anims.generateFrameNumbers('catPlayer', {
+        start: 3,
+        end: 5,
+      }),
+      frameRate: 7,
+      repeat: -1,
+    });
+    this.anims.create({
+      key: 'player_right',
+      frames: this.anims.generateFrameNumbers('catPlayer', {
+        start: 6,
+        end: 8,
+      }),
+      frameRate: 7,
+      repeat: -1,
+    });
+  }
+
+  update() {
+    this.movePlayerManager();
+  }
+
+  movePlayerManager() {
+    //KEY INPUTS
+    let keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
+    let keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
+    let keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
+    let keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
+    let spacebar = this.input.keyboard.addKey(
+      Phaser.Input.Keyboard.KeyCodes.SPACE
+    );
+
+    //PLAYER MOVEMENT
+    if (keyA.isDown) {
+      this.player.setVelocityX(-160);
+      this.player.play('player_right', true).flipX = true;
+    } else if (keyD.isDown) {
+      this.player.setVelocityX(160);
+      this.player.play('player_right', true).flipX = false;
+    } else {
+      this.player.setVelocityX(0);
+      this.player.anims.stop();
+    }
+
+    //JUMP
+    if (spacebar.isDown) {
+      this.player.setVelocityY(-100);
+    }
   }
 }

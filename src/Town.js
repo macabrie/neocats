@@ -40,7 +40,7 @@ export default class Town extends Phaser.Scene {
     this.player = this.physics.add.sprite(
       30,
       config.height - 330,
-      'tdPlayer',
+      'catPlayer',
       1
     );
     this.player.setSize(15, 10, false).setOffset(10, 22);
@@ -57,19 +57,25 @@ export default class Town extends Phaser.Scene {
     //PLAYER ANIMATIONS
     this.anims.create({
       key: 'player_down',
-      frames: this.anims.generateFrameNumbers('tdPlayer', { start: 0, end: 2 }),
+      frames: this.anims.generateFrameNumbers('catPlayer', {
+        start: 0,
+        end: 2,
+      }),
       frameRate: 7,
       repeat: -1,
     });
     this.anims.create({
       key: 'player_left',
-      frames: this.anims.generateFrameNumbers('tdPlayer', { start: 3, end: 5 }),
+      frames: this.anims.generateFrameNumbers('catPlayer', {
+        start: 3,
+        end: 5,
+      }),
       frameRate: 7,
       repeat: -1,
     });
     this.anims.create({
       key: 'player_right',
-      frames: this.anims.generateFrameNumbers('tdPlayer', {
+      frames: this.anims.generateFrameNumbers('catPlayer', {
         start: 6,
         end: 8,
       }),
@@ -78,7 +84,7 @@ export default class Town extends Phaser.Scene {
     });
     this.anims.create({
       key: 'player_up',
-      frames: this.anims.generateFrameNumbers('tdPlayer', {
+      frames: this.anims.generateFrameNumbers('catPlayer', {
         start: 9,
         end: 11,
       }),

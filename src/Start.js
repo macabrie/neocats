@@ -7,36 +7,10 @@ export default class StartGame extends Phaser.Scene {
 
   preload() {
     //TOPDOWN PLAYER
-    this.load.spritesheet('tdPlayer', '../assets/Character/topdownCat.png', {
+    this.load.spritesheet('catPlayer', '../assets/Character/topdownCat.png', {
       frameWidth: 32,
       frameHeight: 32,
     });
-
-    //PLATFORM PLAYER
-    this.load.spritesheet(
-      'platPlayerIdle',
-      '../assets/Character/platformCatIdle.png',
-      {
-        frameWidth: 16,
-        frameHeight: 16,
-      }
-    );
-    this.load.spritesheet(
-      'platPlayerRun',
-      '../assets/Character/platformCatRun.png',
-      {
-        frameWidth: 16,
-        frameHeight: 16,
-      }
-    );
-    this.load.spritesheet(
-      'platPlayerJump',
-      '../assets/Character/platformCatJump.png',
-      {
-        frameWidth: 16,
-        frameHeight: 16,
-      }
-    );
 
     //TOWN TILEMAP
     this.load.image('floorTile', '../assets/TownAssets/TilesetFloor.png');
