@@ -17,13 +17,10 @@ export default class Dojo extends Phaser.Scene {
     const barrierLayer = map.createLayer('Barriers', rTiles, 0, 0);
 
     //PLAYER PLACEMENT AND HITBOX
-    this.player = this.physics.add.sprite(
-      60,
-      config.height - 210,
-      'catPlayer',
-      7
-    );
-    this.player.setScale(2);
+    this.player = this.physics.add
+      .sprite(60, config.height - 210, 'catPlayer', 7)
+      .setScale(2);
+    this.player.setSize(16, 20, false).setOffset(8, 10);
 
     //PLAYER AND LAYER DEPTH
     this.player.setDepth(10);
