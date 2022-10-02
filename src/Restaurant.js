@@ -23,7 +23,7 @@ export default class Dojo extends Phaser.Scene {
     this.player.setSize(16, 20, false).setOffset(8, 10);
 
     //PLAYER AND LAYER DEPTH
-    this.player.setDepth(10);
+    /* this.player.setDepth(10); */
     barrierLayer.setDepth(20).scale = 2;
 
     //GRAVITY AND COLLISION
@@ -53,14 +53,46 @@ export default class Dojo extends Phaser.Scene {
     });
 
     //FOOD PLACEMENT
-    this.applePie = this.add.image(100, 50, 'applePie');
-    this.cheesecake = this.add.image(150, 50, 'cheesecake');
-    this.chocoCake = this.add.image(200, 50, 'chocoCake');
-    this.cookies = this.add.image(250, 50, 'cookies');
-    this.icecream = this.add.image(300, 50, 'icecream');
-    this.pudding = this.add.image(350, 50, 'pudding');
-    this.sbCake = this.add.image(400, 50, 'sbCake');
-    this.waffle = this.add.image(450, 50, 'waffle');
+    this.applePie = this.physics.add.sprite(100, 450, 'applePie');
+    this.cheesecake = this.physics.add.sprite(150, 50, 'cheesecake');
+    this.chocoCake = this.physics.add.sprite(200, 50, 'chocoCake');
+    this.cookies = this.physics.add.sprite(250, 50, 'cookies');
+    this.icecream = this.physics.add.sprite(300, 50, 'icecream');
+    this.pudding = this.physics.add.sprite(350, 50, 'pudding');
+    this.sbCake = this.physics.add.sprite(400, 50, 'sbCake');
+    this.waffle = this.physics.add.sprite(450, 50, 'waffle');
+
+    this.physics.add.overlap(
+      this.player,
+      [
+        this.applePie,
+        this.cheesecake,
+        this.chocoCake,
+        this.cookies,
+        this.icecream,
+        this.pudding,
+        this.sbCake,
+        this.waffle,
+      ],
+      this.collectFood,
+      null,
+      this
+    );
+  }
+
+  collectFood(player, food) {
+    const { config } = this.game;
+    food.disableBody(true, true);
+
+    if (!food.active) {
+      food.enableBody(
+        true,
+        Phaser.Math.Between(60, config.width - 60),
+        0,
+        true,
+        true
+      );
+    }
   }
 
   moveFood(food, speed) {
@@ -117,7 +149,7 @@ export default class Dojo extends Phaser.Scene {
 
     //JUMP
     if (spacebar.isDown) {
-      this.player.setVelocityY(-100);
+      this.player.setVelocityY(-150);
     }
   }
 }
