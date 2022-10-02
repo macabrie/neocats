@@ -15,6 +15,7 @@ export default class Dojo extends Phaser.Scene {
       20,
       `score: ${this.score}`
     );
+    this.quitText = this.add.text(config.width - 170, 100, 'press q to quit');
 
     //TILEMAP
     const map = this.make.tilemap({ key: 'rMap' });
@@ -35,6 +36,7 @@ export default class Dojo extends Phaser.Scene {
     barrierLayer.setDepth(20).scale = 2;
     this.level.setDepth(30);
     this.scoreText.setDepth(30);
+    this.quitText.setDepth(30);
 
     //GRAVITY AND COLLISION
     this.player.body.setGravityY(300);
@@ -136,6 +138,12 @@ export default class Dojo extends Phaser.Scene {
     this.moveFood(this.waffle, 5);
 
     this.movePlayerManager();
+
+    //QUIT OPTION
+    let keyQ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Q);
+    if (keyQ.isDown) {
+      this.scene.start('town');
+    }
   }
 
   movePlayerManager() {
