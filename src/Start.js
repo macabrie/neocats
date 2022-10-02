@@ -53,6 +53,6 @@ export default class StartGame extends Phaser.Scene {
       'loading'
     );
 
-    this.scene.start('town');
+    this.scene.start('dojo');
   }
 }

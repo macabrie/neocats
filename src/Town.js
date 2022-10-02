@@ -7,7 +7,7 @@ export default class Town extends Phaser.Scene {
 
   create() {
     const { config } = this.game;
-    this.add.text(config.width / 2 - 50, 20, 'town');
+    this.instructions = this.add.text(15, 15, 'use WASD to move\nenter a door');
 
     //TILEMAP
     const map = this.make.tilemap({ key: 'map' });
@@ -48,6 +48,7 @@ export default class Town extends Phaser.Scene {
     //PLAYER AND LAYER DEPTH
     this.player.setDepth(10);
     overheadLayer.setDepth(20);
+    this.instructions.setDepth(30);
 
     //COLLISIONS
     this.player.body.collideWorldBounds = true;
@@ -93,14 +94,26 @@ export default class Town extends Phaser.Scene {
     });
 
     //DOOR OVERLAP
-    const objLayer = map.getObjectLayer('Script');
+    const restDoor = map.getObjectLayer('restDoor');
 
-    if (objLayer && objLayer.objects) {
-      objLayer.objects.forEach((object) => {
+    if (restDoor && restDoor.objects) {
+      restDoor.objects.forEach((object) => {
         let door = this.add.rectangle(object.x, object.y, 16, 16);
         this.physics.world.enable(door);
         this.physics.add.overlap(this.player, door, () =>
           this.scene.start('rest')
+        );
+      });
+    }
+
+    const dojoDoor = map.getObjectLayer('dojoDoor');
+
+    if (dojoDoor && dojoDoor.objects) {
+      dojoDoor.objects.forEach((object) => {
+        let door = this.add.rectangle(object.x, object.y, 16, 16);
+        this.physics.world.enable(door);
+        this.physics.add.overlap(this.player, door, () =>
+          this.scene.start('dojo')
         );
       });
     }

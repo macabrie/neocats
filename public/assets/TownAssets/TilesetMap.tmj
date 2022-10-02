@@ -201,7 +201,7 @@
         {
          "draworder":"topdown",
          "id":6,
-         "name":"Script",
+         "name":"restDoor",
          "objects":[
                 {
                  "class":"",
@@ -212,13 +212,41 @@
                         {
                          "name":"name",
                          "type":"string",
-                         "value":"restDoor"
+                         "value":"door"
                         }],
                  "rotation":0,
                  "visible":true,
                  "width":0,
-                 "x":343.564356435644,
-                 "y":310.891089108911
+                 "x":343.564,
+                 "y":310.891
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":7,
+         "name":"dojoDoor",
+         "objects":[
+                {
+                 "class":"",
+                 "height":14.8514851485149,
+                 "id":9,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"name",
+                         "type":"string",
+                         "value":"dojoDoor"
+                        }],
+                 "rotation":0,
+                 "visible":true,
+                 "width":26.7326732673267,
+                 "x":292.079207920792,
+                 "y":64.3564356435644
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -226,8 +254,8 @@
          "x":0,
          "y":0
         }],
- "nextlayerid":7,
- "nextobjectid":9,
+ "nextlayerid":8,
+ "nextobjectid":10,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.9.2",

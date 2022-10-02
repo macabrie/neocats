@@ -1,9 +1,5 @@
 import * as Phaser from 'phaser';
 
-const gameSettings = {
-  playerSpeed: 200,
-};
-
 export default class Dojo extends Phaser.Scene {
   constructor() {
     super({ key: 'dojo' });
@@ -12,55 +8,23 @@ export default class Dojo extends Phaser.Scene {
   create() {
     const { config } = this.game;
 
-    this.add.text(config.width / 2 - 50, 20, 'dojo');
-
-    //BACKGROUND
-    this.sky = this.add.image(0, 0, 'sky');
-    this.sky.setScale(2);
-
-    //PLATFORMS
-    this.platforms = this.physics.add.staticGroup();
-    this.platforms.create(400, 568, 'ground').setScale(2).refreshBody();
-
-    this.platforms.create(600, 400, 'ground');
-    this.platforms.create(50, 250, 'ground');
-    this.platforms.create(750, 220, 'ground');
-
-    //PLAYER PLACEMENT
-    this.player = this.physics.add.sprite(30, config.height - 100, 'player');
-    this.player.setScale(1.5);
-
-    //PLAYER ANIMATIONS
-    this.anims.create({
-      key: 'player_idle',
-      frames: this.anims.generateFrameNumbers('player', { start: 0, end: 3 }),
-      frameRate: 7,
-      repeat: -1,
-    });
-    this.anims.create({
-      key: 'player_right',
-      frames: this.anims.generateFrameNumbers('player', { start: 8, end: 13 }),
-      frameRate: 7,
-      repeat: -1,
-    });
-    this.anims.create({
-      key: 'player_jump',
-      frames: this.anims.generateFrameNumbers('player', { start: 14, end: 23 }),
-      frameRate: 7,
-      repeat: 0,
-    });
-
-    //GRAVITY AND COLLISION
-    this.player.body.setGravityY(250);
-    this.player.body.collideWorldBounds = true;
-    this.physics.add.collider(this.player, this.platforms);
+    this.add.text(config.width / 2 - 55, config.height / 2, 'coming soon!');
+    this.add.text(
+      config.width / 2 - 70,
+      config.height / 2 + 20,
+      'press q to quit'
+    );
   }
 
   update() {
-    this.movePlayerManager();
+    //QUIT OPTION
+    let keyQ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Q);
+    if (keyQ.isDown) {
+      this.scene.start('town');
+    }
   }
 
-  movePlayerManager() {
+  /* movePlayerManager() {
     let keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
     let keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
     let keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
@@ -86,5 +50,5 @@ export default class Dojo extends Phaser.Scene {
       this.player.setVelocityY(-300);
       this.player.play('player_jump');
     }
-  }
+  } */
 }
