@@ -10,7 +10,7 @@ export default class Dojo extends Phaser.Scene {
     //LEVEL AND SCORE TEXT
     this.level = this.add.text(config.width / 2 - 170, 60, 'collect the food!');
 
-    this.timer = this.time.delayedCall(10000, this.gameOver, [], this);
+    this.timer = this.time.delayedCall(30000, this.gameOver, [], this);
     this.timerText = this.add.text(config.width - 170, 20);
 
     this.score = 0;
