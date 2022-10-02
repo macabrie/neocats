@@ -91,6 +91,19 @@ export default class Town extends Phaser.Scene {
       frameRate: 7,
       repeat: -1,
     });
+
+    //DOOR OVERLAP
+    const objLayer = map.getObjectLayer('Script');
+
+    if (objLayer && objLayer.objects) {
+      objLayer.objects.forEach((object) => {
+        let door = this.add.rectangle(object.x, object.y, 16, 16);
+        this.physics.world.enable(door);
+        this.physics.add.overlap(this.player, door, () =>
+          this.scene.start('rest')
+        );
+      });
+    }
   }
 
   update() {
