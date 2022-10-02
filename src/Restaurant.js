@@ -6,7 +6,15 @@ export default class Dojo extends Phaser.Scene {
   }
   create() {
     const { config } = this.game;
-    this.add.text(config.width / 2 - 50, 20, 'restaurant');
+
+    //LEVEL AND SCORE TEXT
+    this.level = this.add.text(config.width / 2 - 170, 60, 'collect the food!');
+    this.score = 0;
+    this.scoreText = this.add.text(
+      config.width - 170,
+      20,
+      `score: ${this.score}`
+    );
 
     //TILEMAP
     const map = this.make.tilemap({ key: 'rMap' });
@@ -22,9 +30,11 @@ export default class Dojo extends Phaser.Scene {
       .setScale(2);
     this.player.setSize(16, 20, false).setOffset(8, 10);
 
-    //PLAYER AND LAYER DEPTH
-    /* this.player.setDepth(10); */
+    //LAYER DEPTH
+    this.player.setDepth(10);
     barrierLayer.setDepth(20).scale = 2;
+    this.level.setDepth(30);
+    this.scoreText.setDepth(30);
 
     //GRAVITY AND COLLISION
     this.player.body.setGravityY(300);
@@ -93,6 +103,9 @@ export default class Dojo extends Phaser.Scene {
         true
       );
     }
+
+    this.score += 10;
+    this.scoreText.text = 'score: ' + this.score;
   }
 
   moveFood(food, speed) {
@@ -127,9 +140,7 @@ export default class Dojo extends Phaser.Scene {
 
   movePlayerManager() {
     //KEY INPUTS
-    let keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
     let keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
-    let keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
     let keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
     let spacebar = this.input.keyboard.addKey(
       Phaser.Input.Keyboard.KeyCodes.SPACE
